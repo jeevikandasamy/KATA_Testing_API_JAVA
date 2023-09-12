@@ -1,12 +1,12 @@
 Feature: Pets APIs
 
-  @get_pets @addnewpet @invalidreqtoaddpet
+  @get_pets @test @invalidreqtoaddpet
   Scenario: Get all the PETS
     When I want to know all the pets in the clinic
 #    Then I should receive 13 pets
     Then I should receive the pets count
 
-  @addnewpet
+  @test
   Scenario Outline: add a new pet
     When user wants to add a new pet with "<addPetDetails>"
     Then verify the pet record added in the list
@@ -16,7 +16,7 @@ Feature: Pets APIs
       | src/test/resources/addNewPet.json |
 
 
-  @invalidreqtoaddpet
+  @invalidreqtoaddpet @test
   Scenario Outline: add a new pet without all necessary values
     When user wants to add a new pet without all necessary values "<addInvalidPetDetail>"
     Then verify the bad request

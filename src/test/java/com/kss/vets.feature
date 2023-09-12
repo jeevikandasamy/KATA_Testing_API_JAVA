@@ -1,6 +1,6 @@
 Feature: Pets APIs
 
-  @addspecialities
+  @addspecialities @test
   Scenario Outline: Get all the vets
     When I want to know all the vets and specialities in the clinic
     Then I verify the status code of the response
