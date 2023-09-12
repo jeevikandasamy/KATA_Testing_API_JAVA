@@ -41,7 +41,6 @@ public class PetsStepDef {
     public void user_wants_to_add_new_pet_with(String addPetDetails) throws Throwable {
         String requestPetObject = null;
         requestPetObject = SupportFunctions.getDatafromJsonFile(addPetDetails);
-        System.out.println("Read data: " + requestPetObject);
         body = SupportFunctions.post(MyConfig.Endpoint + "api/pets", requestPetObject);
         uniqueValueForAPetInRequest = body.asString().split("type")[0];
 
@@ -51,10 +50,9 @@ public class PetsStepDef {
     }
 
 
-    @Then ("^verify the pet record added in the list$")
-    public void verify_the_pet_record_added_in_the_list() throws Throwable{
+    @Then("^verify the pet record added in the list$")
+    public void verify_the_pet_record_added_in_the_list() throws Throwable {
         body = SupportFunctions.get(MyConfig.Endpoint + "api/pets");
-        System.out.println(body.asString() + SupportFunctions.getResponseCode());
         Assert.assertEquals("Response Code", 200, SupportFunctions.getResponseCode());
 
         Pet[] petsDTO = SupportFunctions.convertResponseArray(Pet[].class);
@@ -62,9 +60,25 @@ public class PetsStepDef {
 
         String uniqueValueForAPetInResponse = body.asString().split("type")[0];
 
-        Assert.assertEquals("Latest pet count",amountOfPetsAfterAddition,petsCount);
+        Assert.assertEquals("Latest pet count", amountOfPetsAfterAddition, petsCount);
         Assert.assertTrue(body.asString().contains(uniqueValueForAPetInRequest));
+    }
 
+
+    @When("^user wants to add a new pet without all necessary values \"([^\"]*)\"$")
+    public void user_wants_to_add_new_pet_without_all_necessary_values(String addInvalidPetDetail) throws Throwable {
+        String requestPetObject = null;
+
+        requestPetObject = SupportFunctions.getDatafromJsonFile(addInvalidPetDetail);
+        body = SupportFunctions.post(MyConfig.Endpoint + "api/pets", requestPetObject);
+
+        System.out.println("Api response code: " + SupportFunctions.getResponseCode());
+    }
+
+
+    @Then("^verify the bad request$")
+    public void verify_the_pet_record_is_not_added_in_the_list() throws Throwable {
+        Assert.assertEquals("Response Code", 400, SupportFunctions.getResponseCode());
 
     }
 }
