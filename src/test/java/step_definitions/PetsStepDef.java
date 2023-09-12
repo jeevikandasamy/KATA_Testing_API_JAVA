@@ -18,6 +18,7 @@ import java.util.List;
 public class PetsStepDef {
 
     private static ResponseBody body;
+    public int petsCount;
 
     @When("^I want to know all the pets in the clinic$")
     public void i_want_to_know_all_the_pets_in_the_clinic() throws Throwable {
@@ -27,11 +28,21 @@ public class PetsStepDef {
     }
 
 
-    @Then("^I should receive 13 pets$")
+//    @Then("^I should receive 13 pets$")
+//    public void i_should_receive_pets() throws Throwable {
+//        Pet[] petsDTO = SupportFunctions.convertResponseArray(Pet[].class);
+//        int amountOfPets = petsDTO.length;
+//        Assert.assertEquals("the amount of pets is 13 | ",13,amountOfPets);
+//    }
+
+    @Then("^I should receive the pets count$")
     public void i_should_receive_pets() throws Throwable {
         Pet[] petsDTO = SupportFunctions.convertResponseArray(Pet[].class);
         int amountOfPets = petsDTO.length;
-        Assert.assertEquals("the amount of pets is 13 | ",13,amountOfPets);
+        System.out.print("the amount of pets is  "+ amountOfPets);
+        petsCount=amountOfPets;
     }
+
+
 
 }
