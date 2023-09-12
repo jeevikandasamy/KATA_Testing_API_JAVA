@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features = {
         "src/test/java/com/kss"
 }, glue = "step_definitions",
-        tags = "@addnewpet")
+        tags = "@addspecialities")
 public class RunnerClass {
     public RunnerClass() {
 

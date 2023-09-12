@@ -1,0 +1,11 @@
+{
+  "firstName": "firstName",
+  "id": 3,
+  "lastName": "LastName",
+  "specialties": [
+    {
+      "id": 2,
+      "name": "surgery"
+    }
+  ]
+}
