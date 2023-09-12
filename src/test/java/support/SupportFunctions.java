@@ -8,7 +8,10 @@ import com.jayway.restassured.response.ResponseBody;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class SupportFunctions {
     private static Response response;
@@ -67,7 +70,23 @@ public class SupportFunctions {
         System.out.println(jsonArray);
         return mapper.readValue(jsonArray.toString(), classObj);
     }
-    public static String getResponseCode(){
-        return response.getHeader("Response" );
+
+//    public static String getResponseCode(){
+//        return response.getHeader("Response" );
+//    }
+
+    public static int getResponseCode(){
+        return response.getStatusCode();
+    }
+
+
+    public static String getDatafromJsonFile(String fileLocation) throws IOException {
+        String location = new String(fileLocation);
+        File file = new File(location);
+
+        String content = new String(Files.readAllBytes(Paths.get(file.toURI())));
+        JSONObject json = new JSONObject(content);
+        return json.toString();
+
     }
 }

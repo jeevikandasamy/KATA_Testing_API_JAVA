@@ -1,0 +1,19 @@
+
+{
+  "birthDate": "2023-06-11T11:38:00.811Z",
+  "id": 0,
+  "name": "ricky",
+  "owner": {
+    "address": "string",
+    "city": "string",
+    "firstName": "string",
+    "id": 1,
+    "lastName": "string",
+    "telephone": "string"
+  },
+  "type": {
+    "id": 3,
+    "name": "lizard"
+  },
+  "visits": []
+}

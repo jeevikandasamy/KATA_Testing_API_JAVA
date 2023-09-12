@@ -27,7 +27,6 @@ public class PetsStepDef {
 
     }
 
-
 //    @Then("^I should receive 13 pets$")
 //    public void i_should_receive_pets() throws Throwable {
 //        Pet[] petsDTO = SupportFunctions.convertResponseArray(Pet[].class);
@@ -39,10 +38,18 @@ public class PetsStepDef {
     public void i_should_receive_pets() throws Throwable {
         Pet[] petsDTO = SupportFunctions.convertResponseArray(Pet[].class);
         int amountOfPets = petsDTO.length;
-        System.out.print("the amount of pets is  "+ amountOfPets);
-        petsCount=amountOfPets;
+        System.out.print("the amount of pets is  " + amountOfPets);
+        petsCount = amountOfPets;
     }
 
 
-
+    @When("^user wants to add a new pet with \"([^\"]*)\"$")
+    public void user_wants_to_add_new_pet_with(String addPetDetails) throws Throwable {
+        String requestPetObject = null;
+        requestPetObject = SupportFunctions.getDatafromJsonFile(addPetDetails);
+        System.out.println("Read data: " + requestPetObject);
+        body = SupportFunctions.post(MyConfig.Endpoint + "api/pets", requestPetObject);
+        System.out.println("Api response code: " + SupportFunctions.getResponseCode());
+        Assert.assertEquals("Response Code", 201, SupportFunctions.getResponseCode());
+    }
 }
